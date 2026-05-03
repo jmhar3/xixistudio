@@ -67,7 +67,7 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <Stack>
+    <Stack gap="0">
       <BackgroundImage src={backdrop}>
         <Stack
           h="100vh"
@@ -100,7 +100,7 @@ function Home() {
       </BackgroundImage>
 
       <PageLayout>
-        <Grid mt="md" overflow="scroll" h="90vh">
+        <Grid overflow="hidden" h="87vh">
           <Grid.Col span={8} pos="sticky" top="0">
             <Stack gap="md">
               <Image src={welcome} w="100%" />
