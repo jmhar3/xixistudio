@@ -48,6 +48,7 @@ function MenuButton({ label, path, paths }: MenuButtonProps) {
         closeDelay={250}
         styles={{
           dropdown: {
+            marginTop: "2px",
             borderRadius: "0",
             backgroundColor: "#1c1f21",
             borderColor: "cornflowerblue",
