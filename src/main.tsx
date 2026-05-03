@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, createTheme } from "@mantine/core";
 
 import Home from "./pages/Home.tsx";
 import Features from "./pages/Features.tsx";
@@ -18,9 +18,23 @@ import "@fontsource/alex-brush";
 import "@mantine/core/styles.css";
 import "./global.css";
 
+const theme = createTheme({
+  white: "#f4f4f4",
+  black: "#1c1f21",
+  fontFamily: "Gilda Display, serif",
+  headings: { fontFamily: "Alex Brush, cursive" },
+  components: {
+    Button: {
+      styles: {
+        root: { color: "#f4f4f4", background: "#2A2D2E" },
+      },
+    },
+  },
+});
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MantineProvider>
+    <MantineProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
