@@ -1,5 +1,5 @@
 {
-  "name": "noah",
+  "name": "xixi",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/alex-brush": "^5.2.8",
+    "@fontsource/gilda-display": "^5.2.8",
     "@mantine/carousel": "^8.3.14",
     "@mantine/core": "^8.3.14",
     "@mantine/form": "^8.3.14",
