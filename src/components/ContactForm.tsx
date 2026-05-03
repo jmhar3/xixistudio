@@ -173,6 +173,11 @@ function ContactForm() {
                     mr="3px"
                     c="#f4f4f4"
                     color="#f4f4f4"
+                    gradient={{
+                      from: "cornflowerblue",
+                      to: "cyan",
+                      deg: 60,
+                    }}
                     variant={
                       formFields.hireType === "Space Only"
                         ? "gradient"
@@ -192,6 +197,11 @@ function ContactForm() {
                     w="100%"
                     c="#f4f4f4"
                     color="#f4f4f4"
+                    gradient={{
+                      from: "orange",
+                      to: "pink",
+                      deg: 190,
+                    }}
                     variant={
                       formFields.hireType === "Space & Gear"
                         ? "gradient"
@@ -245,11 +255,9 @@ function ContactForm() {
               <Stack>
                 <Button
                   size="md"
-                  c="#f4f4f4"
-                  color="#f4f4f4"
                   variant="light"
-                  type="submit"
                   loading={isSubmitting}
+                  type="submit"
                 >
                   Send Inquiry
                 </Button>
