@@ -22,6 +22,7 @@ interface FormData {
 
 function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [formFields, setFormFields] = useState<FormData>({ email: "" });
 
@@ -43,15 +44,18 @@ function ContactForm() {
   };
 
   const onFormSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
-    if (formFields.email.length === 0) {
-      setErrorMessage("Please provide a valid email");
-      return;
-    }
-
     event.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
 
+    formData.append("Email", formFields.email);
+    if (formFields.message) formData.append("Message", formFields.message);
+    if (formFields.preferredDate)
+      formData.append("Preferred Date", formFields.preferredDate);
+    if (formFields.preferredTime)
+      formData.append("Preferred Time", formFields.preferredTime);
+    if (formFields.duration)
+      formData.append("Duration", formFields.duration.toString());
     if (formFields.hireType) formData.append("Hire Type", formFields.hireType);
 
     const response = await fetch("https://api.web3forms.com/submit", {
@@ -63,6 +67,7 @@ function ContactForm() {
 
     if (data.success) {
       setFormFields({ email: "" });
+      setIsSubmitted(true);
     } else {
       console.log("Error", data);
       if (data.message) {
@@ -76,12 +81,27 @@ function ContactForm() {
     setIsSubmitting(false);
   };
 
+  if (isSubmitted)
+    return (
+      <Stack
+        p="md"
+        w="100%"
+        align="center"
+        style={{
+          borderTop: "solid 1px #f4f4f4",
+          borderBottom: "solid 1px #f4f4f4",
+        }}
+      >
+        <Text>You're inquiry has been sent. We'll be in touch shortly.</Text>
+      </Stack>
+    );
+
   return (
     <form
-      style={{ width: "100%" }}
       method="post"
       onSubmit={onFormSubmit}
       action="https://api.web3forms.com/submit"
+      style={{ width: "100%" }}
     >
       <Grid
         py="md"
@@ -188,11 +208,6 @@ function ContactForm() {
                   </Button>
                 </Button.Group>
               </Stack>
-              {/*<TextInput
-                w="100%"
-                label="Hire Type"
-                value={formFields.hireType}
-              />*/}
 
               <Divider orientation="vertical" />
 
@@ -218,7 +233,7 @@ function ContactForm() {
                 {formFields.hireType && (
                   <>
                     <Text size="1.5em" h="1em">
-                      Total:
+                      Estimate:
                     </Text>
                     <Text ff="Alex Brush" size="1.8em" h="1.3em">
                       ${total}
