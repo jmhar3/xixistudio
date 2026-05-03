@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import { Stack } from "@mantine/core";
 import { useLocation } from "react-router";
+
 import type { PropsWithChildren } from "react";
 
 import Menu from "./Menu";
 
 function PageLayout({ children }: PropsWithChildren) {
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Stack
